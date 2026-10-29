@@ -1,0 +1,532 @@
+﻿@page
+@{
+    ViewData["Title"] = "American Express - Personal & Business Credit Cards";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <!-- Google Fonts for premium typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+            :root {
+                --amex-blue: #001F5F;
+                --amex-light-blue: #006FCF;
+                --amex-gold: #C49A45;
+                --amex-gold-hover: #D4A853;
+                --amex-dark: #111111;
+                --amex-gray: #666666;
+                --amex-light-gray: #F4F6F8;
+                --border-color: #E5E9F0;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                color: var(--amex-dark);
+                background-color: #FFFFFF;
+                line-height: 1.5;
+            }
+
+            /* Navigation */
+            header {
+                background-color: #FFFFFF;
+                border-bottom: 1px solid var(--border-color);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+
+            .nav-container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 1rem 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .logo-area {
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+            }
+
+            .amex-logo {
+                background-color: var(--amex-blue);
+                color: #FFFFFF;
+                font-weight: 800;
+                font-size: 1.25rem;
+                padding: 0.5rem 0.75rem;
+                letter-spacing: 1px;
+                border-radius: 4px;
+                text-decoration: none;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 1.5rem;
+                list-style: none;
+            }
+
+                .nav-links a {
+                    text-decoration: none;
+                    color: var(--amex-dark);
+                    font-weight: 500;
+                    font-size: 0.95rem;
+                    transition: color 0.2s;
+                }
+
+                    .nav-links a:hover {
+                        color: var(--amex-light-blue);
+                    }
+
+            .nav-actions {
+                display: flex;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .btn-outline {
+                border: 1px solid var(--amex-blue);
+                color: var(--amex-blue);
+                background: transparent;
+                padding: 0.6rem 1.25rem;
+                border-radius: 4px;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                transition: all 0.2s;
+            }
+
+                .btn-outline:hover {
+                    background-color: rgba(0, 31, 95, 0.05);
+                }
+
+            .btn-primary {
+                background-color: var(--amex-blue);
+                color: #FFFFFF;
+                border: none;
+                padding: 0.6rem 1.25rem;
+                border-radius: 4px;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                transition: background-color 0.2s;
+            }
+
+                .btn-primary:hover {
+                    background-color: #00123D;
+                }
+
+            /* Hero Section */
+            .hero {
+                background: linear-gradient(135deg, var(--amex-blue) 0%, #002D72 100%);
+                color: #FFFFFF;
+                padding: 5rem 2rem;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .hero-container {
+                max-width: 1280px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 3rem;
+                align-items: center;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                letter-spacing: -0.5px;
+                line-height: 1.2;
+            }
+
+            .hero-content p {
+                font-size: 1.15rem;
+                color: #E2E8F0;
+                margin-bottom: 2rem;
+                max-width: 500px;
+            }
+
+            .hero-cta {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .btn-gold {
+                background-color: var(--amex-gold);
+                color: var(--amex-dark);
+                border: none;
+                padding: 0.8rem 1.75rem;
+                border-radius: 4px;
+                font-weight: 700;
+                cursor: pointer;
+                text-decoration: none;
+                transition: background-color 0.2s;
+            }
+
+                .btn-gold:hover {
+                    background-color: var(--amex-gold-hover);
+                }
+
+            /* Simulated Card Visual */
+            .hero-card-preview {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .credit-card {
+                width: 360px;
+                height: 220px;
+                background: linear-gradient(135deg, #1A365D 0%, #0F172A 100%);
+                border-radius: 16px;
+                padding: 1.75rem;
+                color: #FFFFFF;
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border: 1px solid rgba(196, 154, 69, 0.3);
+            }
+
+            .card-chip {
+                width: 45px;
+                height: 35px;
+                background: linear-gradient(135deg, #DFD184 0%, #B8973B 100%);
+                border-radius: 6px;
+            }
+
+            .card-number {
+                font-family: monospace;
+                font-size: 1.2rem;
+                letter-spacing: 2px;
+                color: #E2E8F0;
+            }
+
+            .card-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+
+            .card-holder {
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #CBD5E1;
+            }
+
+            .card-brand {
+                font-weight: 800;
+                font-size: 1.1rem;
+                letter-spacing: 1px;
+                color: var(--amex-gold);
+            }
+
+            /* Products Section */
+            .products-section {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 5rem 2rem;
+            }
+
+            .section-title {
+                text-align: center;
+                font-size: 2.25rem;
+                font-weight: 700;
+                margin-bottom: 0.75rem;
+                color: var(--amex-blue);
+            }
+
+            .section-subtitle {
+                text-align: center;
+                color: var(--amex-gray);
+                font-size: 1.1rem;
+                margin-bottom: 3rem;
+            }
+
+            .card-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+
+            .product-card {
+                background: #FFFFFF;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+
+                .product-card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 10px 20px rgba(0, 31, 95, 0.08);
+                }
+
+                .product-card h3 {
+                    font-size: 1.35rem;
+                    color: var(--amex-blue);
+                    margin-bottom: 0.75rem;
+                }
+
+                .product-card p {
+                    color: var(--amex-gray);
+                    font-size: 0.95rem;
+                    margin-bottom: 1.5rem;
+                }
+
+            .product-benefits {
+                list-style: none;
+                margin-bottom: 2rem;
+            }
+
+                .product-benefits li {
+                    font-size: 0.9rem;
+                    color: var(--amex-dark);
+                    padding: 0.4rem 0;
+                    border-bottom: 1px solid var(--amex-light-gray);
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                }
+
+                    .product-benefits li::before {
+                        content: "✓";
+                        color: var(--amex-light-blue);
+                        font-weight: bold;
+                    }
+
+            /* Benefits Banner */
+            .benefits-banner {
+                background-color: var(--amex-light-gray);
+                padding: 5rem 2rem;
+            }
+
+            .banner-container {
+                max-width: 1280px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2.5rem;
+            }
+
+            .benefit-item h4 {
+                font-size: 1.15rem;
+                color: var(--amex-blue);
+                margin-bottom: 0.5rem;
+            }
+
+            .benefit-item p {
+                color: var(--amex-gray);
+                font-size: 0.95rem;
+            }
+
+            /* Footer */
+            footer {
+                background-color: var(--amex-dark);
+                color: #A0AEC0;
+                padding: 3rem 2rem;
+                font-size: 0.85rem;
+            }
+
+            .footer-container {
+                max-width: 1280px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .footer-links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 2rem;
+                list-style: none;
+            }
+
+                .footer-links a {
+                    color: #A0AEC0;
+                    text-decoration: none;
+                    transition: color 0.2s;
+                }
+
+                    .footer-links a:hover {
+                        color: #FFFFFF;
+                    }
+
+            .footer-legal {
+                border-top: 1px solid #2D3748;
+                padding-top: 1.5rem;
+                color: #718096;
+            }
+
+            /* Responsive */
+            @@media (max-width: 768px) {
+                .hero-container {
+                    grid-template-columns: 1fr;
+                    text-align: center;
+                }
+
+                .hero-content h1 {
+                    font-size: 2.25rem;
+                }
+
+                .hero-cta {
+                    justify-content: center;
+                }
+
+                .nav-links {
+                    display: none;
+                }
+            }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo-area">
+                <a href="#" class="amex-logo">AMEX</a>
+                <ul class="nav-links">
+                    <li><a href="#">Cards</a></li>
+                    <li><a href="#">Travel</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="#">Rewards</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions">
+                <a href="#" class="btn-outline">Log In</a>
+                <a href="#" class="btn-primary">Apply Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Get AMEX CC for free of Cost</h1>
+                <p>Discover elevated rewards, exceptional travel benefits, and world-class customer service tailored to your lifestyle.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn-gold">Explore Cards</a>
+                    <a href="#" class="btn-outline" style="color: #FFF; border-color: #FFF;">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-card-preview">
+                <div class="credit-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div class="card-chip"></div>
+                        <span style="font-size: 0.8rem; letter-spacing: 1px; color: var(--amex-gold);">PLATINUM</span>
+                    </div>
+                    <div class="card-number">•••• •••••• •2006</div>
+                    <div class="card-footer">
+                        <div class="card-holder">ALEXANDER WRIGHT</div>
+                        <div class="card-brand">AMEX</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="products-section">
+        <h2 class="section-title">Find the Card That Fits You</h2>
+        <p class="section-subtitle">Compare our premium personal and business offerings.</p>
+
+        <div class="card-grid">
+            <div class="product-card">
+                <div>
+                    <h3>Amex Platinum Card®</h3>
+                    <p>The ultimate card for travel, luxury perks, and premium lifestyle privileges.</p>
+                    <ul class="product-benefits">
+                        <li>5X Membership Rewards® on flights</li>
+                        <li>$200 annual hotel credit</li>
+                        <li>Global Lounge Collection access</li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-primary" style="text-align: center;">Apply Now</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <h3>Amex Gold Card®</h3>
+                    <p>Designed for food lovers, dining out, and everyday grocery rewards.</p>
+                    <ul class="product-benefits">
+                        <li>4X Membership Rewards® at Restaurants</li>
+                        <li>4X at US Supermarkets</li>
+                        <li>$120 annual dining credit</li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-primary" style="text-align: center;">Apply Now</a>
+            </div>
+
+            <div class="product-card">
+                <div>
+                    <h3>Business Platinum®</h3>
+                    <p>Power your enterprise with robust expense tools and business travel perks.</p>
+                    <ul class="product-benefits">
+                        <li>1.5X points on eligible large purchases</li>
+                        <li>50% more points on key business categories</li>
+                        <li>Dedicated business concierge</li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-primary" style="text-align: center;">Apply Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition Banner -->
+    <section class="benefits-banner">
+        <div class="banner-container">
+            <div class="benefit-item">
+                <h4>World-Class Service</h4>
+                <p>Real assistance available 24/7. Whether it's fraud protection or travel changes, we have your back.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Flexible Rewards</h4>
+                <p>Earn points that don't expire and can be transferred to top airline and hotel partners.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Global Acceptance</h4>
+                <p>Use your American Express card with confidence at millions of locations worldwide.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <ul class="footer-links">
+                <li><a href="#">About American Express</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Investor Relations</a></li>business 
+                <li><a href="#">Security Center</a></li>
+                <li><a href="#">Site Map</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <div class="footer-legal">
+                <p>&copy; 2026 American Express Company from USA and Canada. All rights reserved. Built as a single-file ASP.NET Core Razor Page.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
